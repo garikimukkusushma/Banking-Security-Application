@@ -42,14 +42,18 @@ function Dashboard() {
             <div className="card-icon">💸</div>
             <h3>Transfer Money</h3>
             <p>Transfer money securely.</p>
-            <button>Transfer</button>
+           <Link to="/transfer" className="dashboard-button">
+  Transfer
+</Link>
           </div>
 
           <div className="dashboard-card">
             <div className="card-icon">📋</div>
             <h3>Transactions</h3>
             <p>View recent transactions.</p>
-            <button>View Transactions</button>
+            <Link to="/transactions" className="dashboard-button">
+  View Transactions
+</Link>
           </div>
 
         </div>

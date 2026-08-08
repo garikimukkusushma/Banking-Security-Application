@@ -1,0 +1,68 @@
+.transfer-page {
+  min-height: 100vh;
+  background: #eef3f8;
+  padding: 40px;
+}
+
+.transfer-container {
+  max-width: 700px;
+  margin: auto;
+}
+
+.back-link {
+  color: #12355b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.transfer-container h1 {
+  color: #12355b;
+  margin-top: 30px;
+}
+
+.transfer-container > p {
+  color: #666;
+}
+
+.transfer-card {
+  margin-top: 25px;
+  background: white;
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.transfer-card label {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 8px;
+  color: #12355b;
+  font-weight: bold;
+}
+
+.transfer-card input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccd5df;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.transfer-card button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background: #12355b;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.transfer-message {
+  margin-top: 20px;
+  color: #12355b;
+  font-weight: bold;
+}
