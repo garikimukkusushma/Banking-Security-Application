@@ -1,0 +1,53 @@
+.security-page {
+  min-height: 100vh;
+  background: #eef3f8;
+  padding: 40px;
+}
+
+.security-container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.security-container h1 {
+  color: #12355b;
+  margin-top: 30px;
+}
+
+.security-container > p {
+  color: #666;
+}
+
+.security-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.security-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.security-icon {
+  font-size: 40px;
+}
+
+.security-card h2 {
+  color: #12355b;
+  margin: 15px 0 10px;
+}
+
+.security-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .security-cards {
+    grid-template-columns: 1fr;
+  }
+}

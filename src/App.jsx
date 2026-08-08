@@ -7,7 +7,7 @@ import Transfer from "./pages/Transfer";
 import Transactions from "./pages/Transactions";
 import Register from "./components/Register";
 import Login from "./components/Login";
-
+import Security from "./pages/Security";
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +25,7 @@ function App() {
 
         <Route path="/transfer" element={<Transfer />} />
         <Route path="/transactions" element={<Transactions />} />
+        <Route path="/security" element={<Security />} />
       </Routes>
     </BrowserRouter>
   );

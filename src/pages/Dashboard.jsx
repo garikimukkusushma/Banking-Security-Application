@@ -29,31 +29,48 @@ function Dashboard() {
 
         <div className="dashboard-cards">
 
+          {/* Account */}
           <div className="dashboard-card">
             <div className="card-icon">💳</div>
             <h3>Account</h3>
             <p>View your account details.</p>
+
             <Link to="/account" className="dashboard-button">
               View Account
             </Link>
           </div>
 
+          {/* Transfer Money */}
           <div className="dashboard-card">
             <div className="card-icon">💸</div>
             <h3>Transfer Money</h3>
             <p>Transfer money securely.</p>
-           <Link to="/transfer" className="dashboard-button">
-  Transfer
-</Link>
+
+            <Link to="/transfer" className="dashboard-button">
+              Transfer
+            </Link>
           </div>
 
+          {/* Transactions */}
           <div className="dashboard-card">
             <div className="card-icon">📋</div>
             <h3>Transactions</h3>
             <p>View recent transactions.</p>
+
             <Link to="/transactions" className="dashboard-button">
-  View Transactions
-</Link>
+              View Transactions
+            </Link>
+          </div>
+
+          {/* Security */}
+          <div className="dashboard-card">
+            <div className="card-icon">🔐</div>
+            <h3>Security</h3>
+            <p>View banking security features.</p>
+
+            <Link to="/security" className="dashboard-button">
+              Security Center
+            </Link>
           </div>
 
         </div>
