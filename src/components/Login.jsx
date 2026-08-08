@@ -1,20 +1,22 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
+    const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!username || !password) {
-      alert("Please enter username and password");
-      return;
-    }
+  if (!username || !password) {
+    alert("Please enter username and password");
+    return;
+  }
 
-    alert("Login successful!");
-  };
+  navigate("/dashboard");
+};
 
   return (
     <div className="login-page">
