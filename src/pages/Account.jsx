@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Account() {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user")) || {};
+
+  const [balance] = useState(
+    Number(localStorage.getItem("balance")) || 50000
+  );
 
   return (
     <div
@@ -70,7 +74,8 @@ function Account() {
           </p>
 
           <p>
-            <strong>Available Balance:</strong> ₹50,000
+            <strong>Available Balance:</strong>{" "}
+            ₹{balance.toLocaleString("en-IN")}
           </p>
         </div>
 

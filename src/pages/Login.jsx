@@ -7,19 +7,40 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const hashPassword = async (password) => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    return hashArray
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    const savedUser = JSON.parse(localStorage.getItem("user"));
-
-    if (!savedUser) {
-      alert("No account found. Please register first.");
+    if (!email || !password) {
+      alert("Please enter email and password");
       return;
     }
 
+    const savedUser =
+      JSON.parse(localStorage.getItem("user")) || null;
+
+    if (!savedUser) {
+      alert("No registered user found. Please register first.");
+      return;
+    }
+
+    const passwordHash = await hashPassword(password);
+
     if (
       email === savedUser.email &&
-      password === savedUser.password
+      passwordHash === savedUser.passwordHash
     ) {
       localStorage.setItem("isLoggedIn", "true");
 
@@ -32,86 +53,106 @@ function Login() {
   };
 
   return (
-    <div style={containerStyle}>
-      <div style={cardStyle}>
-        <h1>🔐 Login</h1>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#f4f7fb",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "30px",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "450px",
+          background: "white",
+          padding: "35px",
+          borderRadius: "15px",
+          boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+        }}
+      >
+        <h1
+          style={{
+            textAlign: "center",
+            color: "#172554",
+          }}
+        >
+          🔐 Secure Login
+        </h1>
+
+        <p
+          style={{
+            textAlign: "center",
+            color: "#64748b",
+            marginBottom: "30px",
+          }}
+        >
+          Secure Banking Application
+        </p>
 
         <form onSubmit={handleLogin}>
+          <label>Email</label>
+
           <input
             type="email"
-            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
             style={inputStyle}
           />
 
+          <label>Password</label>
+
           <input
             type="password"
-            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
             style={inputStyle}
           />
 
           <button type="submit" style={buttonStyle}>
-            🔐 Login
+            🔐 Login Securely
           </button>
         </form>
 
         <button
           onClick={() => navigate("/register")}
-          style={linkButtonStyle}
+          style={{
+            ...buttonStyle,
+            background: "#64748b",
+            marginTop: "15px",
+          }}
         >
-          New user? Register
+          Create New Account
         </button>
       </div>
     </div>
   );
 }
 
-const containerStyle = {
-  minHeight: "100vh",
-  background: "#f4f7fb",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const cardStyle = {
-  background: "white",
-  padding: "35px",
-  borderRadius: "15px",
-  width: "350px",
-  boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-};
-
 const inputStyle = {
   width: "100%",
-  padding: "12px",
-  marginBottom: "15px",
-  boxSizing: "border-box",
-  border: "1px solid #ccc",
+  padding: "13px",
+  marginTop: "8px",
+  marginBottom: "18px",
+  border: "1px solid #cbd5e1",
   borderRadius: "8px",
   fontSize: "16px",
+  boxSizing: "border-box",
 };
 
 const buttonStyle = {
   width: "100%",
-  padding: "12px",
+  padding: "13px",
   background: "#172554",
   color: "white",
   border: "none",
   borderRadius: "8px",
+  cursor: "pointer",
   fontSize: "16px",
-  cursor: "pointer",
-};
-
-const linkButtonStyle = {
-  marginTop: "15px",
-  border: "none",
-  background: "none",
-  color: "#172554",
-  cursor: "pointer",
 };
 
 export default Login;
