@@ -1,104 +1,117 @@
-import { Link } from "react-router-dom";
-import "./Dashboard.css";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   return (
-    <div className="dashboard-page">
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#f4f7fb",
+        padding: "40px",
+      }}
+    >
+      <div style={{ maxWidth: "1000px", margin: "auto" }}>
+        <h1 style={{ color: "#172554" }}>🏦 Secure Banking Dashboard</h1>
 
-      <nav className="dashboard-navbar">
-        <div className="dashboard-logo">🏦 SecureBank</div>
+        <p style={{ fontSize: "18px", color: "#555" }}>
+          Welcome to your secure banking account
+        </p>
 
-        <div className="dashboard-nav">
-          <Link to="/">Home</Link>
-          <Link to="/login">Logout</Link>
-        </div>
-      </nav>
-
-      <main className="dashboard-container">
-
-        <div className="welcome-section">
-          <h1>Welcome to Your Dashboard 👋</h1>
-          <p>Manage your banking activities securely.</p>
-        </div>
-
-        <div className="balance-card">
-          <p>Available Balance</p>
-          <h2>₹25,000.00</h2>
-          <span>Account: XXXX XXXX 4582</span>
-        </div>
-
-        <div className="dashboard-cards">
-
-          {/* Account */}
-          <div className="dashboard-card">
-            <div className="card-icon">💳</div>
-            <h3>Account</h3>
-            <p>View your account details.</p>
-
-            <Link to="/account" className="dashboard-button">
-              View Account
-            </Link>
-          </div>
-
-          {/* Transfer Money */}
-          <div className="dashboard-card">
-            <div className="card-icon">💸</div>
-            <h3>Transfer Money</h3>
-            <p>Transfer money securely.</p>
-
-            <Link to="/transfer" className="dashboard-button">
-              Transfer
-            </Link>
-          </div>
-
-          {/* Transactions */}
-          <div className="dashboard-card">
-            <div className="card-icon">📋</div>
-            <h3>Transactions</h3>
-            <p>View recent transactions.</p>
-
-            <Link to="/transactions" className="dashboard-button">
-              View Transactions
-            </Link>
-          </div>
-
-          {/* Security */}
-          <div className="dashboard-card">
-            <div className="card-icon">🔐</div>
-            <h3>Security</h3>
-            <p>View banking security features.</p>
-
-            <Link to="/security" className="dashboard-button">
-              Security Center
-            </Link>
-          </div>
-
+        {/* Balance Card */}
+        <div
+          style={{
+            background: "#172554",
+            color: "white",
+            padding: "30px",
+            borderRadius: "15px",
+            marginTop: "30px",
+          }}
+        >
+          <h3>Available Balance</h3>
+          <h1>₹50,000</h1>
+          <p>Account status: 🟢 Active</p>
         </div>
 
-        <div className="transactions">
-          <h2>Recent Transactions</h2>
+        {/* Menu */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: "20px",
+            marginTop: "30px",
+          }}
+        >
+          <button
+            onClick={() => navigate("/account")}
+            style={buttonStyle}
+          >
+            👤
+            <br />
+            Account
+          </button>
 
-          <div className="transaction">
-            <span>🛒 Online Shopping</span>
-            <strong>- ₹1,200</strong>
-          </div>
+          <button
+            onClick={() => navigate("/transfer")}
+            style={buttonStyle}
+          >
+            💸
+            <br />
+            Transfer Money
+          </button>
 
-          <div className="transaction">
-            <span>💰 Salary Credit</span>
-            <strong>+ ₹20,000</strong>
-          </div>
+          <button
+            onClick={() => navigate("/transactions")}
+            style={buttonStyle}
+          >
+            📋
+            <br />
+            Transactions
+          </button>
 
-          <div className="transaction">
-            <span>☕ Food & Restaurant</span>
-            <strong>- ₹450</strong>
-          </div>
-
+          <button
+            onClick={() => navigate("/security")}
+            style={buttonStyle}
+          >
+            🔐
+            <br />
+            Security
+          </button>
         </div>
 
-      </main>
-
+        {/* Logout */}
+        <button
+          onClick={() => navigate("/login")}
+          style={{
+            marginTop: "30px",
+            padding: "12px 30px",
+            background: "#dc2626",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontSize: "16px",
+          }}
+        >
+          🚪 Logout
+        </button>
+      </div>
     </div>
   );
 }
+
+const buttonStyle = {
+  padding: "30px 20px",
+  background: "white",
+  border: "none",
+  borderRadius: "15px",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+  fontSize: "18px",
+  fontWeight: "bold",
+  color: "#172554",
+  cursor: "pointer",
+  lineHeight: "2",
+};
 
 export default Dashboard;

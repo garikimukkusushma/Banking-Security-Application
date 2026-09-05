@@ -1,64 +1,64 @@
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Transactions.css";
 
 function Transactions() {
-  const transactions = [
-    {
-      date: "08 Aug 2026",
-      description: "Salary Credit",
-      type: "Credit",
-      amount: "₹30,000",
-    },
-    {
-      date: "07 Aug 2026",
-      description: "Online Shopping",
-      type: "Debit",
-      amount: "₹2,500",
-    },
-    {
-      date: "05 Aug 2026",
-      description: "Money Transfer",
-      type: "Debit",
-      amount: "₹1,000",
-    },
-    {
-      date: "03 Aug 2026",
-      description: "Cash Deposit",
-      type: "Credit",
-      amount: "₹5,000",
-    },
-  ];
+  const navigate = useNavigate();
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    const savedTransactions =
+      JSON.parse(localStorage.getItem("transactions")) || [];
+
+    setTransactions(savedTransactions);
+  }, []);
 
   return (
     <div className="transactions-page">
       <div className="transactions-container">
 
-        <Link to="/dashboard" className="back-link">
-          ← Back to Dashboard
-        </Link>
+        <div className="transactions-header">
+          <h1>📋 Transactions</h1>
 
-        <h1>📋 Transactions</h1>
-        <p>View your recent banking transactions.</p>
-
-        <div className="transactions-card">
-          <h2>Recent Transactions</h2>
-
-          <div className="transaction-list">
-            {transactions.map((transaction, index) => (
-              <div className="transaction-row" key={index}>
-                <div>
-                  <strong>{transaction.description}</strong>
-                  <span>{transaction.date}</span>
-                </div>
-
-                <div className={transaction.type.toLowerCase()}>
-                  <strong>{transaction.amount}</strong>
-                  <span>{transaction.type}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <button
+            className="back-btn"
+            onClick={() => navigate("/dashboard")}
+          >
+            ← Dashboard
+          </button>
         </div>
+
+        {transactions.length === 0 ? (
+          <div className="no-transactions">
+            <h2>No Transactions Found</h2>
+            <p>Your transaction history will appear here.</p>
+          </div>
+        ) : (
+          transactions.map((transaction) => (
+            <div
+              className="transaction-card"
+              key={transaction.id}
+            >
+              <div className="transaction-info">
+                <h3>{transaction.type}</h3>
+
+                <p>
+                  <strong>Description:</strong>{" "}
+                  {transaction.description}
+                </p>
+
+                <p>
+                  <strong>Date:</strong>{" "}
+                  {transaction.date}
+                </p>
+              </div>
+
+              <div className="transaction-amount">
+                {transaction.amount}
+              </div>
+            </div>
+          ))
+        )}
 
       </div>
     </div>
